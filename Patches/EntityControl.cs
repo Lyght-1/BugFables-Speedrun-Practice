@@ -12,5 +12,4 @@ namespace SpeedrunPractice.Patches
       if (__instance.playerentity)
         __instance.ccol.enabled = !MainManager_Ext.toggleCollision;
     }
-  }
 }
