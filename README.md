@@ -80,7 +80,8 @@ Enemies Affected By Perfect RNG Toggle :
 * ELK : Always Venus Bud when grounded, vines in the air
 * Keys : Always Spin attack
 
-IL Mode : 
+## IL Mode 
+
 By pressing 3 and choosing an IL, you can select any split you would like to practice. This will set your game state to whatever that split is. You can start the IL by either entering the next room or defeating the corresponding enemies with F3 (following the current glitchless route). After that, you follow the glitchless route to finish the IL. 
 
 You can check out your IL stats ingame by going into the Pause Menu Library (book icon) and pressing P. You can check out each golds/segment times there and your sum of best. You can edit the splits in the splits folder in BepInEx/splits
