@@ -5,7 +5,7 @@ A BepInEx plugin assisting speedrunners of the game Bug Fables. This plugin is a
 2. Since the patches are done at runtime instead of being a static patch, it allows more liberty in configuration in conjunction with BepInEx's standardized configuration scheme
 3. Due to #1, the code can be distributed publically under a Git repository which allows better tracking of changes through time
 
-> _This branch is only compatible with version 1.1 of the game. Please use the 1.0.5 branch if you must use this plugin with previous versions of the game._
+> _This branch is only compatible with version 1.2 of the game. Please use the 1.0.5 branch if you must use this plugin with previous versions of the game._
 
 ## Installation instructions
 > _If you already have a 1.x version of the old practice dll (one that came with an Assembly-CSharp.dll), you must uninstall it first._
@@ -27,7 +27,7 @@ If you want to entirely remove BepInEx and all of its plugins, delete the follow
 * The file winhttp.dll
 
 ## Usage instructions
-This plugin functions by adding features when pressing the F keys on the keyboard during gameplay.
+This plugin functions by adding features when pressing certain keys on the keyboard during gameplay. You can change the keybinds ingame in the settings menu under keybinds. 
 
 In the overworld:
 
@@ -44,6 +44,18 @@ In the overworld:
 * F11 - Save position in room
 * F12 - Load position in room
 * DEL - Toggle NoClip+Infinite Jump 
+* L-CTRL - Free Cam
+* 1 - Exit IL Mode
+* 2 - Map List (choose any map to tp to)
+* 3 - Choose IL (choose IL to practice)
+* 4 - Reset IL
+* 5 - Toggle Ghost
+* 6 - Undo Split
+* 7 - Toggle Freeze Resistance
+* 8 - Hide Timer IL 
+* 9 - Toggle "Perfect" RNG (list of enemies affected below)
+
+Note: If you close or re-enter the main menu, you will lose your saved positions.
 
 In battle:
 
@@ -51,7 +63,32 @@ In battle:
 * F4 - Instant Flee (w/o losing berries)
 * F5 - Instant Retry during battle
 
-Note: If you close or re-enter the main menu, you will lose your saved positions.
+Enemies Affected By Perfect RNG Toggle : 
+* Aria : Never Def up, always Vine attack
+* VeGu : Never Stats up, always Slam on ground and Bomb in air, best rng roll on wait times for slam
+* Scarlet : Always Atk up or Beams
+* Ahoneynation : Always charges
+* B33 : Always laser attack
+* Astotheles : Always focuses Kabbu, always multi hits and hits 3 times
+* Dune Scorpion : Always tail attack, best rng roll on wait times, focuses Vi
+* Beast : Always Horns, focuses Vi
+* Primal Weevil : Always Roar, Never Atk Up
+* Ultimax Tank : Always Charges
+* Ultimax : Always focuses Vi
+* Deadlanders Gamma : Always laser attack
+* Wasp King : Always axe throw
+* ELK : Always Venus Bud when grounded, vines in the air
+* Keys : Always Spin attack
+
+IL Mode : 
+By pressing 3 and choosing an IL, you can select any split you would like to practice. This will set your game state to whatever that split is. You can start the IL by either entering the next room or defeating the corresponding enemies with F3 (following the current glitchless route). After that, you follow the glitchless route to finish the IL. 
+
+You can check out your IL stats ingame by going into the Pause Menu Library (book icon) and pressing P. You can check out each golds/segment times there and your sum of best. You can edit the splits in the splits folder in BepInEx/splits
+
+After completing any IL, you'll be able to race against your PB ghost. You can hide the ghost at any time by pressing 5 if its too annoying. Ghost data is going to be in BepInEx/ghostRecordings
+
+You should be able to reset at any point even if there's a cutscene or in battle. In battle, make sure that no enemies is attacking and that nothing is happening. 
+If you reset and theres something on screen (like an item bugged on the GUI), you can clean everything by pressing F8 and going back to the main menu.
 
 ## Building and debugging instructions
 This section is intended ***only for developers***. You do not need to do this if you only want to use the plugin. Refer to the ***Installation instructions*** section for this purpose.
@@ -74,7 +111,7 @@ All contributions via pull requests are welcome as well as issue reports on this
 If you are planning to submit a pull request, do not share any substantial amount of code from the game as it can lead to copyright issues and thanks to Harmony + BepInEx, it can be avoided in almost all cases. Any pull requests that contains substantial amount of code from the game will be immediately denied if I judge it can be done without sharing the code.
 
 ## Credits
-This plugin was done by Benjee, wataniyob, Wintar, Lyght and I with the help of ArchaicEx.
+This plugin was done by Lyght, Benjee, wataniyob, Wintar and aldelaro5 with the help of ArchaicEx.
 
 ## License
 This plugin is licensed under the MIT license which grants you the permission to freely use, modify and distribute this plugin as long as the original license and its copyright notice is still present. Refer to [the MIT license](https://github.com/aldelaro5/BugFables-Speedrun-Practice/blob/master/LICENSE) for more information.
