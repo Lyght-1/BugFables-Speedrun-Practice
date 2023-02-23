@@ -4,15 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using UnityEngine;
 
 namespace SpeedrunPractice.Patches
 {
     [HarmonyPatch(typeof(PlayerControl), "Start")]
     public class PatchPlayerControlStart
     {
-      __instance.gameObject.AddComponent<PlayerControl_Ext>();
-      __instance.basespeed = PlayerControl_Ext.speed;
-      return true;
+        static bool Prefix(PlayerControl __instance)
+        {
+            __instance.gameObject.AddComponent<PlayerControl_Ext>();
+            __instance.basespeed = PlayerControl_Ext.speed;
+            return true;
+        }
     }
 
     [HarmonyPatch(typeof(PlayerControl), "Update")]
@@ -20,13 +24,30 @@ namespace SpeedrunPractice.Patches
     {
         static bool Prefix(PlayerControl __instance)
         {
-            if (!MainManager.instance.minipause && !MainManager.instance.message)
+            var playerControlExt = __instance.gameObject.GetComponent<PlayerControl_Ext>();
+            if (!MainManager.instance.minipause && !MainManager.instance.message && !MainManager.instance.pause && !MainManager.instance.inevent)
             {
-                var playerControlExt = __instance.gameObject.GetComponent<PlayerControl_Ext>();
                 playerControlExt.PracticeFKeys(__instance);
             }
+            playerControlExt.ILPracticeKeys();
 
+            if (!__instance.flying && __instance.entity.rigid.velocity.y <= 0)
+                playerControlExt.startHeight = __instance.transform.position.y;
             return true;
+        }
+
+        static void Postfix(PlayerControl __instance)
+        {
+            if (!MainManager.GetKey(5, true))
+                MainManager_Ext.flyHoldFrames = 0;
+        }
+    }
+    [HarmonyPatch(typeof(PlayerControl), "DoJump")]
+    public class PatchPlayerControlDoJump
+    {
+        static void Prefix(PlayerControl __instance)
+        {
+            MainManager_Ext.flyHoldFrames = __instance.actionhold;
         }
     }
 

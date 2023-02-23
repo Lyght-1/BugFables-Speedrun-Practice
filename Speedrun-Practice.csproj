@@ -57,6 +57,9 @@
       <HintPath>Libs\BepInEx.Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -366,12 +369,60 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\BattleControl_Ext.cs" />
+    <Compile Include="Extensions\BattleMenu.cs" />
+    <Compile Include="Extensions\GhostRecorder.cs" />
+    <Compile Include="Extensions\ILData\Abomihoneys.cs" />
+    <Compile Include="Extensions\ILData\Ahoneynation.cs" />
+    <Compile Include="Extensions\ILData\Astotheles.cs" />
+    <Compile Include="Extensions\ILData\B33.cs" />
+    <Compile Include="Extensions\ILData\Beast.cs" />
+    <Compile Include="Extensions\ILData\Deadlanders.cs" />
+    <Compile Include="Extensions\ILData\DuneScorpion.cs" />
+    <Compile Include="Extensions\ILData\EnterCore.cs" />
+    <Compile Include="Extensions\ILData\EnterForsaken.cs" />
+    <Compile Include="Extensions\ILData\EnterPrison.cs" />
+    <Compile Include="Extensions\ILData\GeneralUltimax.cs" />
+    <Compile Include="Extensions\ILData\MerchantsRescue.cs" />
+    <Compile Include="Extensions\ILData\EnterFactory.cs" />
+    <Compile Include="Extensions\ILData\Festival.cs" />
+    <Compile Include="Extensions\ILData\Oven.cs" />
+    <Compile Include="Extensions\ILData\Fridge.cs" />
+    <Compile Include="Extensions\ILData\GoldenPath.cs" />
+    <Compile Include="Extensions\ILData\PrimalWeevil.cs" />
+    <Compile Include="Extensions\ILData\Scarlet.cs" />
+    <Compile Include="Extensions\ILData\Snakemouth.cs" />
+    <Compile Include="Extensions\ILData\LeifRescue.cs" />
+    <Compile Include="Extensions\ILData\Deadlands.cs" />
+    <Compile Include="Extensions\ILData\RubberPrison.cs" />
+    <Compile Include="Extensions\ILData\Spuder.cs" />
+    <Compile Include="Extensions\ILData\Swamplands.cs" />
+    <Compile Include="Extensions\ILData\EnterFG.cs" />
+    <Compile Include="Extensions\ILData\SandCastle.cs" />
+    <Compile Include="Extensions\ILData\BanditHideout.cs" />
+    <Compile Include="Extensions\ILData\EnterBH.cs" />
+    <Compile Include="Extensions\ILData\HoneyFactory.cs" />
+    <Compile Include="Extensions\ILData\GoldenHills.cs" />
+    <Compile Include="Extensions\ILData\UltimaxTank.cs" />
+    <Compile Include="Extensions\ILData\Termite.cs" />
+    <Compile Include="Extensions\ILData\UpperGolden.cs" />
+    <Compile Include="Extensions\ILData\VeGu.cs" />
+    <Compile Include="Extensions\ILData\WaspKing.cs" />
+    <Compile Include="Extensions\ILData\Watcher.cs" />
+    <Compile Include="Extensions\ILData\ZaspMothiva.cs" />
+    <Compile Include="Extensions\ILTimer.cs" />
     <Compile Include="Extensions\FreeCam.cs" />
     <Compile Include="Extensions\MainManager_Ext.cs" />
+    <Compile Include="Extensions\PauseMenu_Ext.cs" />
     <Compile Include="Extensions\PlayerControl_Ext.cs" />
+    <Compile Include="Extensions\Split.cs" />
+    <Compile Include="Extensions\SplitGroup.cs" />
     <Compile Include="Extensions\StartMenu_Ext.cs" />
     <Compile Include="Patches\EntityControl.cs" />
+    <Compile Include="Patches\EventControl.cs" />
     <Compile Include="Patches\GroundDetector.cs" />
+    <Compile Include="Patches\InputIO.cs" />
+    <Compile Include="Patches\PauseMenu.cs" />
+    <Compile Include="Patches\Random.cs" />
     <Compile Include="Patches\RayDetector.cs" />
     <Compile Include="SpeedrunPracticePlugin.cs" />
     <Compile Include="Patches\BattleControl.cs" />
@@ -379,6 +430,9 @@
     <Compile Include="Patches\PlayerControl.cs" />
     <Compile Include="Patches\StartMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
