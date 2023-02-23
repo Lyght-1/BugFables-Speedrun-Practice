@@ -666,7 +666,7 @@ namespace SpeedrunPractice.Extensions
             timerUI.text = Split.GetTimeFormat(time);
             if (ghost != null && ghost.gameObject.activeSelf)
             {
-                Destroy(ghost);
+                Destroy(ghost.gameObject);
             }
         }
 
