@@ -10,7 +10,7 @@ namespace SpeedrunPractice.Extensions
         public static bool checkingPBs = false;
         public static int maxOption = 0;
         public static ButtonSprite pButton = null;
-        public static void Test(List<string> list)
+        public static void BuildPBWindow(List<string> list)
         {
             if (checkingPBs)
             {

@@ -193,7 +193,6 @@ namespace SpeedrunPractice.Patches
 
                 if (inst.LoadsConstant(88) && indexToInsertPatch == -1)
                 {
-                    Console.WriteLine("found menutext 88 in showitemlist");
                     indexToInsertPatch = i+6;
                     indexLocalInt = i - 1;
                 }

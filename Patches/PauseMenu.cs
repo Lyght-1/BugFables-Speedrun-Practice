@@ -100,7 +100,7 @@ namespace SpeedrunPractice.Patches
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             var instructionsList = instructions.ToList();
-            var setOptionsTextRef = AccessTools.Method(typeof(PauseMenu_Ext), "Test");
+            var setOptionsTextRef = AccessTools.Method(typeof(PauseMenu_Ext), "BuildPBWindow");
             int indexToInsertPatch = -1;
             for (int i = 0; i < instructionsList.Count; i++)
             {

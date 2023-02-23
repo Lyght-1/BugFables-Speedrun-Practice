@@ -32,7 +32,6 @@ namespace SpeedrunPractice.Patches
                 }
             }
             
-
             if(id == 204 && MainManager_Ext.ilMode && MainManager.instance.GetComponent<ILTimer>().il == IL.WaspKing)
             {
                 MainManager.instance.GetComponent<ILTimer>().EndWaspKingIL();
