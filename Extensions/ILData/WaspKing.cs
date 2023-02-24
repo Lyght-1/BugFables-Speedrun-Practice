@@ -78,7 +78,7 @@ namespace SpeedrunPractice.Extensions.ILData
             {
                 new Split("Wasp King", MainManager.Maps.GiantLairSaplingPlains, TypeSplit.BattleEnd, enemies:waspKing),
                 new Split("ELK", MainManager.Maps.GiantLairSaplingPlains, TypeSplit.BattleEnd, enemies:elk),
-                new Split("End", MainManager.Maps.BugariaEndThrone, TypeSplit.Credit)
+                new Split("End", MainManager.Maps.BugariaEndThrone, TypeSplit.Credit, endID:MainManager.Maps.BugariaEndThrone)
             };
         }
     }
