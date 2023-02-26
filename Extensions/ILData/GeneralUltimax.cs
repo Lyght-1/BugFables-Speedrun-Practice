@@ -10,7 +10,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
         public override void SetupData()
         {
-            offset = TimeSpan.Parse("00:00:19.300");
+            offset = TimeSpan.Parse("00:00:19.400");
             ilType = IL.GeneralUltimax;
             startMap = MainManager.Maps.SwamplandsBoss;
             startPos = new Vector3(0, 0, 65.88f);
