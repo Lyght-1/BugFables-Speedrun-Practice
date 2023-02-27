@@ -59,7 +59,8 @@ namespace SpeedrunPractice.Extensions.ILData
 
         public override void DoSpecifics()
         {
-            MainManager.Heal();
+            MainManager.Heal(true,true);
+            MainManager_Ext.togglePerfectRNG = true;
             MainManager.instance.flagvar[19] = 1;
             MainManager.instance.flagvar[18] = 1;
             MainManager.instance.flagvar[53] = 1;
