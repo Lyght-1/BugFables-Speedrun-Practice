@@ -74,6 +74,7 @@ namespace SpeedrunPractice.Extensions
         int pbGhostIndex = 0;
         public static bool lvlSongStarted = false;
         public static bool endCredit = false;
+        int frameStart = 0;
         void Start()
         {
             timerUI = DynamicFont.SetUp(true, 1f, 2, 100, Vector2.one * 1.2f, MainManager.GUICamera.transform, new Vector3(-7.6f, 2.4f, 10f));
@@ -106,40 +107,41 @@ namespace SpeedrunPractice.Extensions
             {
                 if (start && MainManager_Ext.ilMode)
                 {
+                    pbGhostIndex = Time.frameCount - frameStart;
                     var playerEntity = MainManager.player.entity;
-                    if(playerEntity != null)
+                    if (playerEntity != null)
                         recordings.Add(new GhostRecorder(playerEntity.transform.position, playerEntity.animstate, playerEntity.flip, playerEntity.animid, MainManager.map.mapid));
                     timer += Time.unscaledDeltaTime;
                     TimeSpan time = TimeSpan.FromSeconds(timer);
-                    timerUI.text =Split.GetTimeFormat(time);
+                    timerUI.text = Split.GetTimeFormat(time);
 
                     TimeSpan currentSplitTimer = time;
-                    if(splitIndex != 0)
+                    if (splitIndex != 0)
                     {
-                        currentSplitTimer = time.Subtract(splitGroups[(int)il].splits[splitIndex - 1].runTime);            
+                        currentSplitTimer = time.Subtract(splitGroups[(int)il].splits[splitIndex - 1].runTime);
                     }
-                    if(GetCurrentSplit().segmentTime != TimeSpan.Zero && currentSplitTimer.CompareTo(GetCurrentSplit().segmentTime) == 1 && currentSplitTime.fontcolor == Color.white)
-                    { 
+                    if (GetCurrentSplit().segmentTime != TimeSpan.Zero && currentSplitTimer.CompareTo(GetCurrentSplit().segmentTime) == 1 && currentSplitTime.fontcolor == Color.white)
+                    {
                         currentSplitTime = ChangeDynamicFontColor(currentSplitTime, Color.red, "");
                     }
                     else
                     {
-                        if(currentSplitTime.fontcolor == Color.red && currentSplitTimer.CompareTo(GetCurrentSplit().segmentTime) == -1)
+                        if (currentSplitTime.fontcolor == Color.red && currentSplitTimer.CompareTo(GetCurrentSplit().segmentTime) == -1)
                         {
                             currentSplitTime = ChangeDynamicFontColor(currentSplitTime, Color.white, "");
                         }
                         currentSplitTime.text = Split.GetTimeFormat(currentSplitTimer);
                     }
-                         
+
                     var pbGhost = pbGhosts[(int)il];
                     if (pbGhost != null && pbGhost.Count != 0 && pbGhostIndex < pbGhost.Count)
                     {
-                        if (ghost == null && MainManager.instance.playerdata!=null && MainManager.instance.playerdata[0].entity != null)
+                        if (ghost == null && MainManager.instance.playerdata != null && MainManager.instance.playerdata[0].entity != null)
                         {
                             CreateGhost();
                         }
 
-                        if(ghost != null)
+                        if (ghost != null)
                         {
                             //this is cause for 2 frames u can see the ghost in a weird pos after map transition, cause game does loadmap before moving players
                             bool ghostNotInTransition = pbGhostIndex > 1 && pbGhost[pbGhostIndex].currentMap == pbGhost[pbGhostIndex - 2].currentMap;
@@ -159,14 +161,13 @@ namespace SpeedrunPractice.Extensions
                                 ghost.gameObject.SetActive(false);
                             }
                         }
-                        pbGhostIndex++;
                     }
-                    if(GetCurrentSplit().type == TypeSplit.Flag)
+                    if (GetCurrentSplit().type == TypeSplit.Flag)
                         CheckSplit();
 
-                    if(GetCurrentSplit().type == TypeSplit.Credit && !endCredit)
+                    if (GetCurrentSplit().type == TypeSplit.Credit && !endCredit)
                     {
-                        if(MainManager.instance.inevent && MainManager.lastevent == 205 && MainManager.map.mapid == MainManager.Maps.BugariaEndThrone)
+                        if (MainManager.instance.inevent && MainManager.lastevent == 205 && MainManager.map.mapid == MainManager.Maps.BugariaEndThrone)
                         {
                             if (MainManager.musicids[0] == (int)MainManager.Musics.LevelUp)
                             {
@@ -390,6 +391,7 @@ namespace SpeedrunPractice.Extensions
         void StartSplit()
         {
             start = true;
+            frameStart = Time.frameCount;
             splitGroups[(int)il].state = SplitState.Started;
             splitGroups[(int)il].attemptsCount += 1;
             WriteSplits();
