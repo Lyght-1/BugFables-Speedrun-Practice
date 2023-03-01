@@ -69,7 +69,7 @@ namespace SpeedrunPractice.Extensions
         public SplitGroup[] splitGroups = new SplitGroup[Enum.GetNames(typeof(IL)).Length - 1];
         public EntityControl ghost;
         public List<GhostRecorder> recordings = new List<GhostRecorder>();
-        public List<GhostRecorder>[] pbGhosts = new List<GhostRecorder>[Enum.GetNames(typeof(IL)).Length - 1];
+        public GhostRecorder[] pbGhosts = null;
         public static bool hideGhost = false;
         int pbGhostIndex = 0;
         public static bool lvlSongStarted = false;
@@ -98,7 +98,6 @@ namespace SpeedrunPractice.Extensions
             currentSplitTime = DynamicFont.SetUp(true, 1f, 2, 100, new Vector2(0.35f, 0.35f), timerUI.transform, new Vector3(2.4f, 0.8f, 10f));
 
             ReadSplits();
-            ReadGhosts();
         }
 
         void Update()
@@ -133,9 +132,9 @@ namespace SpeedrunPractice.Extensions
                         currentSplitTime.text = Split.GetTimeFormat(currentSplitTimer);
                     }
 
-                    var pbGhost = pbGhosts[(int)il];
-                    if (pbGhost != null && pbGhost.Count != 0 && pbGhostIndex < pbGhost.Count)
+                    if (pbGhosts != null && pbGhosts.Length != 0 && pbGhostIndex < pbGhosts.Length)
                     {
+                        var currentGhost = pbGhosts[pbGhostIndex];
                         if (ghost == null && MainManager.instance.playerdata != null && MainManager.instance.playerdata[0].entity != null)
                         {
                             CreateGhost();
@@ -144,16 +143,16 @@ namespace SpeedrunPractice.Extensions
                         if (ghost != null)
                         {
                             //this is cause for 2 frames u can see the ghost in a weird pos after map transition, cause game does loadmap before moving players
-                            bool ghostNotInTransition = pbGhostIndex > 1 && pbGhost[pbGhostIndex].currentMap == pbGhost[pbGhostIndex - 2].currentMap;
+                            bool ghostNotInTransition = pbGhostIndex > 1 && currentGhost.currentMap == pbGhosts[pbGhostIndex-2].currentMap;
 
-                            if (MainManager.map.mapid == pbGhost[pbGhostIndex].currentMap && !hideGhost && !MainManager.instance.inbattle && ghostNotInTransition)
+                            if (MainManager.map.mapid == currentGhost.currentMap && !hideGhost && !MainManager.instance.inbattle && ghostNotInTransition)
                             {
                                 ChangeGhostOpacity();
                                 ghost.gameObject.SetActive(true);
-                                ghost.SetPosition(pbGhost[pbGhostIndex].position);
-                                ghost.SetState(pbGhost[pbGhostIndex].animState);
-                                ghost.flip = pbGhost[pbGhostIndex].flip;
-                                ghost.animid = pbGhost[pbGhostIndex].animID;
+                                ghost.SetPosition(currentGhost.position);
+                                ghost.SetState(currentGhost.animState);
+                                ghost.flip = currentGhost.flip;
+                                ghost.animid = currentGhost.animID;
 
                             }
                             else
@@ -207,8 +206,19 @@ namespace SpeedrunPractice.Extensions
             endCredit = false;
             lvlSongStarted = false;
             splitGroup.state = SplitState.NotStarted;
+
             recordings.Clear();
+            LoadGhost();
             pbGhostIndex = 0;
+
+            GC.Collect();
+            Resources.UnloadUnusedAssets();
+
+            foreach (var sound in MainManager.sounds)
+            {
+                if(sound != null)
+                    MainManager.StopSound(sound.clip);
+            }
 
             if (il == IL.LeifRescue || il == IL.Snakemouth)
             {
@@ -765,7 +775,7 @@ namespace SpeedrunPractice.Extensions
             string ilName = il.ToString();
             string path = "BepInEx/ghostRecordings/" + ilName + ".txt";
             var ghostStrings = new List<string>();
-            foreach (var record in pbGhosts[(int)il])
+            foreach (var record in pbGhosts)
             {
                 ghostStrings.Add(record.ToString());
             }
@@ -775,40 +785,30 @@ namespace SpeedrunPractice.Extensions
             }
         }
 
-        void ReadGhosts()
+        void LoadGhost()
         {
-            foreach (IL ilType in Enum.GetValues(typeof(IL)))
-            {
-                if (ilType == IL.None)
-                    continue;
-                string ilName = ilType.ToString();
-                string path = "BepInEx/ghostRecordings/" + ilName + ".txt";
-                if (File.Exists(path))
+            string ilName = il.ToString();
+            string path = "BepInEx/ghostRecordings/" + ilName + ".txt";
+            if (File.Exists(path))
+            { 
+                var ghostStrings = new List<string>(File.ReadAllLines(path));
+                pbGhosts = new GhostRecorder[ghostStrings.Count];
+                for (int i = 0; i != ghostStrings.Count; i++)
                 {
-                    pbGhosts[(int)ilType] = new List<GhostRecorder>();
-                    var ghostStrings = new List<string>(File.ReadAllLines(path));
-                    for (int i = 0; i != ghostStrings.Count; i++)
-                    {
-                        string[] data = ghostStrings[i].Split('|');
-                        string position = data[0].Substring(1, data[0].Length - 2);
-                        var vectorArray = position.Split(',');
+                    string[] data = ghostStrings[i].Split('|');
+                    string position = data[0].Substring(1, data[0].Length - 2);
+                    var vectorArray = position.Split(',');
 
-                        Vector3 pos = new Vector3(float.Parse(vectorArray[0]), float.Parse(vectorArray[1]), float.Parse(vectorArray[2]));
-                        MainManager.Maps map = (MainManager.Maps)Enum.Parse(typeof(MainManager.Maps), data[4]);
-                        pbGhosts[(int)ilType].Add(new GhostRecorder(pos, int.Parse(data[1]), bool.Parse(data[2]), int.Parse(data[3]), map));
-                    }
+                    Vector3 pos = new Vector3(float.Parse(vectorArray[0]), float.Parse(vectorArray[1]), float.Parse(vectorArray[2]));
+                    MainManager.Maps map = (MainManager.Maps)Enum.Parse(typeof(MainManager.Maps), data[4]);
+                    pbGhosts[i] = new GhostRecorder(pos, int.Parse(data[1]), bool.Parse(data[2]), int.Parse(data[3]), map);
                 }
             }
         }
 
         public void RecordGhostPb()
         {
-            if (pbGhosts[(int)il] == null)
-                pbGhosts[(int)il] = new List<GhostRecorder>();
-            var pbGhost = pbGhosts[(int)il];
-            pbGhost.Clear();
-            foreach (var record in recordings)
-                pbGhost.Add(record);
+            pbGhosts = recordings.ToArray();
         }
 
         public void UndoSplit()
