@@ -33,6 +33,7 @@ namespace SpeedrunPractice.Patches
 
             if (!__instance.flying && __instance.entity.rigid.velocity.y <= 0)
                 playerControlExt.startHeight = __instance.transform.position.y;
+
             return true;
         }
 

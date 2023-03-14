@@ -62,9 +62,7 @@ namespace SpeedrunPractice.Extensions.ILData
             shadesPool = null;
         }
 
-        public override void DoSpecifics()
-        {
-        }
+        public override void DoSpecifics(){}
 
         public override void SetSplits()
         {
@@ -73,12 +71,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 new Split("Enter Castle", MainManager.Maps.SandCastleEntrance, TypeSplit.Room),
                 new Split("Main Room", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
                 new Split("Slide Puzzle", MainManager.Maps.SandCastleSlidePuzzle, TypeSplit.Room),
-                new Split("Main Room 2", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
-                new Split("Respawn Strat", MainManager.Maps.SandCastleBasement, TypeSplit.Room),
-                new Split("Main Room 3", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
-                new Split("Statue Room", MainManager.Maps.SandCastleStatueRoom, TypeSplit.Room),
-                new Split("Boulder Room", MainManager.Maps.SandCastleRockRoom, TypeSplit.Room),
-                new Split("Main Room 4", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
+                new Split("SandCastle Skip", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
                 new Split("Slide Puzzle 2", MainManager.Maps.SandCastleSlidePuzzle, TypeSplit.Room),
                 new Split("Cursed Room", MainManager.Maps.SandCastlePressurePuzzle, TypeSplit.Room),
                 new Split("Main Room 5", MainManager.Maps.SandCastleMainRoom, TypeSplit.Room),
