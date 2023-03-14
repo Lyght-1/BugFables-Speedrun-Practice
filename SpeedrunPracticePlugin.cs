@@ -3,14 +3,14 @@ using HarmonyLib;
 
 namespace SpeedrunPractice
 {
-  [BepInPlugin("com.aldelaro5.BugFables.plugins.SpeedrunPractice", "Speedrun Practice", "5.0.0")]
-  [BepInProcess("Bug Fables.exe")]
-  public class SpeedrunPracticePlugin : BaseUnityPlugin
-  {
-    void Awake()
+    [BepInPlugin("com.Lyght.BugFables.plugins.SpeedrunPractice", "Speedrun Practice", "5.0.1")]
+    [BepInProcess("Bug Fables.exe")]
+    public class SpeedrunPracticePlugin : BaseUnityPlugin
     {
-      var harmony = new Harmony("com.aldelaro5.BugFables.harmony.SpeedrunPractice");
-      harmony.PatchAll();
+        void Awake()
+        {
+            var harmony = new Harmony("com.Lyght.BugFables.harmony.SpeedrunPractice");
+            harmony.PatchAll();
+        }
     }
-  }
 }
