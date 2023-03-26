@@ -17,7 +17,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.DesertBadlands;
             startPos = new Vector3(18.8f, 2, -8.5f);
             items = new List<int> { 70, 70, (int)MainManager.Items.ShockShroom };
-            keyItems = new List<int>{27,41,105};
+            keyItems = new List<int>{27,41, (int)MainManager.Items.GHCrank,105 };
 
             crystalBerryAmount = 0;
 

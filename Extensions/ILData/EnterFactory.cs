@@ -18,7 +18,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.DesertCaravanMap;
             startPos = new Vector3(-33.6f, 0, 1.8f);
             items = new List<int> { 17, 17, 26, 1, 2, 2 };
-            keyItems = new List<int> { 27, 41 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank };
             crystalBerryAmount = 8;
 
             boardQuests = new List<int>[]

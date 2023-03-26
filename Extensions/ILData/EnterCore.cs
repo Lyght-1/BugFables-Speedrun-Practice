@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.FactoryStorageMiniboss;
             startPos = new Vector3(-24.6f, 4, -0.1f);
             items = new List<int> { 26, 2, 1 };
-            keyItems = new List<int> { 27, 41 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank };
             crystalBerryAmount = 4;
 
             boardQuests = new List<int>[]

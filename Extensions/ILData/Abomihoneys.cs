@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.FactoryProcessingPuzzle1;
             startPos = new Vector3(-0.76f, 0, 13.21f);
             items = new List<int> { 17, 17, 26, 2, 2, 1 };
-            keyItems = new List<int> { 27, 41, 95, 95 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.MainCrank,95, 95 };
             crystalBerryAmount = 4;
 
             boardQuests = new List<int>[]

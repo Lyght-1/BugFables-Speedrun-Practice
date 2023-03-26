@@ -14,7 +14,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.DesertFGBorder;
             startPos = new Vector3(7, 0, 13.86f);
             items = new List<int>{70,70,70};
-            keyItems = new List<int>{27,41,116};
+            keyItems = new List<int>{27,41, (int)MainManager.Items.GHCrank,116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

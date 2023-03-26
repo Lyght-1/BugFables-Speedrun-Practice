@@ -67,10 +67,10 @@ namespace SpeedrunPractice.Extensions.ILData
             shadesPool = new List<int> { 42, 43, 19, 9, 49, 0 };
         }
 
-        public override void DoSpecifics() 
+        public override void DoSpecifics()
         {
             MainManager.Heal(true, true);
-            MainManager.instance.flagstring[8] = "70,70-27,41,105-28";
+            MainManager.instance.flagstring[8] = "70,70-27,41,105,58-28";
             MainManager_Ext.togglePerfectRNG = true;
         }
 

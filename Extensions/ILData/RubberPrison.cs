@@ -13,8 +13,8 @@ namespace SpeedrunPractice.Extensions.ILData
             ilType = IL.RubberPrison;
             startMap = MainManager.Maps.MetalLake;
             startPos = new Vector3(14f, -0.37f, 15.59f);
-            items = new List<int>{ 130,130,130,130,130,1,172,172 };
-            keyItems = new List<int>{27,41,116};
+            items = new List<int>{ 130,130,130,130,130,172,172 };
+            keyItems = new List<int>{27,41, (int)MainManager.Items.GHCrank,116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]
@@ -54,7 +54,7 @@ namespace SpeedrunPractice.Extensions.ILData
             bp = 1;
             maxbp = 17;
             level = 8;
-            exp = 38;
+            exp = 31;
             maxExp = 107;
             inventorySpace = 10;
 
@@ -78,19 +78,8 @@ namespace SpeedrunPractice.Extensions.ILData
                 new Split("Respawn Strat", MainManager.Maps.RubberPrisonCells2, TypeSplit.Room),
                 new Split("Third Floor", MainManager.Maps.RubberPrisonThirdFloor, TypeSplit.Room),
                 new Split("Outside", MainManager.Maps.RubberPrisonPier, TypeSplit.Room),
-                new Split("Geyser Room", MainManager.Maps.RubberPrisonOffice, TypeSplit.Room),
-                new Split("Outside 2", MainManager.Maps.RubberPrisonPier, TypeSplit.Room),
-                new Split("Third Floor 2", MainManager.Maps.RubberPrisonThirdFloor, TypeSplit.Room),
-                new Split("LSS 2", MainManager.Maps.RubberPrisonCells1, TypeSplit.Room),
-                new Split("Cafeteria", MainManager.Maps.RubberPrisonCafeteria, TypeSplit.Room),
-                new Split("LSS 3", MainManager.Maps.RubberPrisonCells1, TypeSplit.Room),
-                new Split("Third Floor 3", MainManager.Maps.RubberPrisonThirdFloor, TypeSplit.Room),
-                new Split("Security Room", MainManager.Maps.RubberPrisonSecurity, TypeSplit.Room),
-                new Split("Outside 3", MainManager.Maps.RubberPrisonPier, TypeSplit.Room),
-                new Split("Library", MainManager.Maps.RubberPrisonLibrary, TypeSplit.Room),
-                new Split("Outside 4", MainManager.Maps.RubberPrisonPier, TypeSplit.Room),
-                new Split("Geyser 2", MainManager.Maps.RubberPrisonOffice, TypeSplit.Room),
-                new Split("Outside 5", MainManager.Maps.RubberPrisonPier, TypeSplit.Room,  endID: MainManager.Maps.RubberPrisonGiantLairBridge)
+                new Split("Crank", MainManager.Maps.RubberPrisonOffice, TypeSplit.Room),
+                new Split("Outside 2", MainManager.Maps.RubberPrisonPier, TypeSplit.Room,  endID: MainManager.Maps.RubberPrisonGiantLairBridge)
             };
         }
     }

@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.BarrenLandsMiniboss;
             startPos = new Vector3(7.2f, 0, -2f);
             items = new List<int> { (int)MainManager.Items.BlackCherry, (int)MainManager.Items.BlackCherry };
-            keyItems = new List<int> { 27, 41, 116 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank, 116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

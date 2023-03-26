@@ -14,7 +14,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.GoldenPathTunnel;
             startPos = new Vector3(-39.68f, 0, -6.1f);
             items = new List<int> { 70, (int)MainManager.Items.BlackCherry, (int)MainManager.Items.BlackCherry };
-            keyItems = new List<int> { 27, 41, 116 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank, 116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

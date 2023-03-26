@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.SandCastleTreasureRoom;
             startPos = new Vector3(-8, 0, 0);
             items = new List<int> { };
-            keyItems = new List<int>{27,41,174,116};
+            keyItems = new List<int>{27,41, (int)MainManager.Items.GHCrank, 174,116};
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

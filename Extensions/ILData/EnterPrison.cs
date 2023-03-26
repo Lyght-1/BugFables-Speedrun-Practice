@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.TermiteColiseum1;
             startPos = new Vector3(-0.1f, 0, -8.2f);
             items = new List<int> { 130,130,130,130,130, (int)MainManager.Items.HoneyDrop };
-            keyItems = new List<int> { 27, 41, 116 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank, 116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

@@ -56,7 +56,7 @@ namespace SpeedrunPractice.Extensions.ILData
             bp = 1;
             maxbp = 17;
             level = 8;
-            exp = 86;
+            exp = 56;
             maxExp = 107;
             inventorySpace = 10;
 

@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.FactoryProcessingMalbee;
             startPos = new Vector3(-17.29f, 0, 0);
             items = new List<int> { 17, 26, 2, 2, 1 };
-            keyItems = new List<int> { 27, 41 };
+            keyItems = new List<int> { 27, 41 , (int)MainManager.Items.GHCrank };
             crystalBerryAmount = 4;
 
             boardQuests = new List<int>[]

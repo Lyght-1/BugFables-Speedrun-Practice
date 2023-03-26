@@ -18,7 +18,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.HideoutEntrance;
             startPos = new Vector3(-5.28f, 0, -0.2f);
             items = new List<int> { 70, 70, (int)MainManager.Items.ShockShroom };
-            keyItems = new List<int> { 27,41, (int)MainManager.Items.SandCastleKey };
+            keyItems = new List<int> { 27,41, (int)MainManager.Items.GHCrank, (int)MainManager.Items.SandCastleKey };
 
             crystalBerryAmount = 0;
 

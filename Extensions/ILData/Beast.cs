@@ -14,7 +14,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.SwamplandsBridge;
             startPos = new Vector3(19, -7, 16.18f);
             items = new List<int> { 70, 70, 70 };
-            keyItems = new List<int> { 27, 41, 116 };
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank, 116 };
             crystalBerryAmount = 0;
 
             boardQuests = new List<int>[]

@@ -17,7 +17,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.GoldenHillsDungeonUpperMain;
             startPos = new Vector3(-11.8f, 0, 21.11f);
             items = new List<int> { 2, 2, 172 };
-            keyItems = new List<int> { 27, 41, 174 };
+            keyItems = new List<int> { 27, 41, 174, (int)MainManager.Items.GHCrank };
             crystalBerryAmount = 7;
 
             boardQuests = new List<int>[]

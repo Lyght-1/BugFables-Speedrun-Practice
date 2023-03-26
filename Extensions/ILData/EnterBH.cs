@@ -18,7 +18,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startMap = MainManager.Maps.HoneyFactoryCore;
             startPos = new Vector3(0, 0, -2);
             items = new List<int> { };
-            keyItems = new List<int> { 27, 41};
+            keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank };
             crystalBerryAmount = 4;
 
             boardQuests = new List<int>[]
