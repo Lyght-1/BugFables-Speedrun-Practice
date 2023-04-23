@@ -21,7 +21,7 @@ namespace SpeedrunPractice.Extensions
                 {
                     if(splitGroup != null)
                     {
-                        TimeSpan sumo = TimeSpan.Zero;
+                        TimeSpan sob = TimeSpan.Zero;
                         var splitList = new List<string>();
                         var ilName = (IL)counter;
                         var size = "0.5,0.5";
@@ -34,14 +34,14 @@ namespace SpeedrunPractice.Extensions
                         splitList.Add("---Split Name----------PB-----------Segment---------Gold--");
                         foreach (var split in splitGroup.splits)
                         {
-                            sumo = sumo.Add(split.goldTime);
+                            sob = sob.Add(split.goldTime);
                             string pbTime = Split.GetTimeFormat(split.pbTime);
-                            string segmentTime = Split.GetTimeFormat(split.segmentTime);
+                            string segmentTime = Split.GetTimeFormat(split.oldSegmentTime);
                             string goldTime = Split.GetTimeFormat(split.goldTime);
                             string splitName = split.name.Length > 17 ? split.name.Substring(0, 12) + "..." : split.name;
                             splitList.Add(splitName.PadRight(15, '.') + "-----" + pbTime + "------" + segmentTime + "------" + goldTime);         
                         }
-                        string sumOfBest = Split.GetTimeFormat(sumo);
+                        string sumOfBest = Split.GetTimeFormat(sob);
                         splitList[splitList.Count - 1] += "|line||font,2|";
                         splitList.Add("|size,0.5,0.5|Sum of Best : " + sumOfBest + " ------- Attempts : " + splitGroup.attemptsCount);
                         list.Add(string.Join("|line|", splitList.ToArray()));

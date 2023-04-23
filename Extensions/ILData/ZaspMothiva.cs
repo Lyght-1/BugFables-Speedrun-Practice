@@ -58,7 +58,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
         public override void DoSpecifics()
         {
-            MainManager.Heal();
+            MainManager.Heal(true,true);
         }
 
         public override void SetSplits()

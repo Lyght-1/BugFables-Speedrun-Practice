@@ -70,7 +70,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 new Split("Spicies", MainManager.Maps.BugariaMainPlaza, TypeSplit.Room),
                 new Split("Wasp Trooper", MainManager.Maps.BOGoldenPath, TypeSplit.BattleEnd, enemies:waspTrooper),
                 new Split("Cave", MainManager.Maps.GoldenPathTunnel, TypeSplit.Room),
-                new Split("Cristal Berry", MainManager.Maps.GoldenHillsCableCar, TypeSplit.Room),
+                new Split("Crystal Berry", MainManager.Maps.GoldenHillsCableCar, TypeSplit.Room),
                 new Split("Cranks", MainManager.Maps.GoldenHillsPath2, TypeSplit.Room),
                 new Split("Respawn", MainManager.Maps.GoldenHillsPath3, TypeSplit.Room,endID: MainManager.Maps.GoldenSettlementEntrance)
             };

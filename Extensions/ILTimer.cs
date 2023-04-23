@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -49,6 +50,7 @@ namespace SpeedrunPractice.Extensions
         Fridge,
         Oven,
         WaspKing,
+        RandomIL,
         None,
     }
     public class ILTimer : MonoBehaviour
@@ -195,8 +197,11 @@ namespace SpeedrunPractice.Extensions
         public IEnumerator StartIL(IL ilType)
         {
             MainManager_Ext.ilMode = true;
-            MainManager_Ext.noFreezeRes = ilType != IL.Oven;
             il = ilType;
+            if(ilType == IL.RandomIL)
+                il = (IL)UnityEngine.Random.Range(0,(int)Enum.GetValues(typeof(IL)).Cast<IL>().Where(a => a != IL.None && a != IL.RandomIL).Max());
+
+            MainManager_Ext.noFreezeRes = il != IL.Oven;
             var splitGroup = splitGroups[(int)il];
             MainManager.instance.minipause = true;
             MainManager.instance.inevent = true;
@@ -735,7 +740,7 @@ namespace SpeedrunPractice.Extensions
         {
             foreach (IL il in Enum.GetValues(typeof(IL)))
             {
-                if (il == IL.None)
+                if (il == IL.None || il == IL.RandomIL)
                     continue;
                 string ilName = il.ToString();
 
