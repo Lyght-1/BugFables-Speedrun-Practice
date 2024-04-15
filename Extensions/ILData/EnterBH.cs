@@ -64,6 +64,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
         public override void DoSpecifics()
         {
+            MainManager.instance.flagvar[58] = 1;
         }
 
         public override void SetSplits()
