@@ -20,7 +20,7 @@ namespace SpeedrunPractice.Extensions.ILData
             items = new List<int> { 70, 70, (int)MainManager.Items.ShockShroom };
             keyItems = new List<int> { 27,41, (int)MainManager.Items.GHCrank, (int)MainManager.Items.SandCastleKey };
 
-            crystalBerryAmount = 0;
+            crystalBerryAmount = 1;
 
             boardQuests = new List<int>[]
             {
@@ -40,7 +40,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
             discoveries = new List<int> { 0, 1, 6, 7, 11, 12, 13, 20, 21, 24, 29 };
             seenAreas = new List<int> { 0, 1, 2, 3, 4, 5, 6, 10, 12, 13, 20 };
-            cbFlags = new List<int> { 0, 2, 4, 5, 8, 9, 12, 15, 16, 18 };
+            cbFlags = new List<int> { 0,1, 2, 4, 5, 8, 9, 12, 15, 16, 18 };
 
             medals = new List<int[]>
             {

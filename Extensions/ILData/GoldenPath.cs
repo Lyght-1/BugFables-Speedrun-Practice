@@ -16,7 +16,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startPos = new Vector3(0, 0, 4.5f);
             items = new List<int> { (int)MainManager.Items.Mushroom, (int)MainManager.Items.HoneyDrop, (int)MainManager.Items.VitalitySeed };
             keyItems = new List<int> { 27 };
-            crystalBerryAmount = 2;
+            crystalBerryAmount = 3;
 
             boardQuests = new List<int>[]
             {
@@ -27,7 +27,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
             flags = new List<int>{7,10,11,13,14,15,16,17,22,23,24,27,28,29,30,31,32,33,34,35,36,41,74,108,691,694};
 
-            cbFlags = new List<int> { 0, 2 };
+            cbFlags = new List<int> { 0,1, 2 };
 
             medals = new List<int[]>
             {

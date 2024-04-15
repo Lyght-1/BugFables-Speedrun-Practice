@@ -34,7 +34,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 108,109,110,111,112,113,114,115,116,117,118,119,120,122,124,125,126,127,128,129,240,479,617,663,691,694
             };
 
-            cbFlags = new List<int> { 0, 2, 4, 5, 8, 9 };
+            cbFlags = new List<int> { 0,1, 2, 4, 5, 8, 9 };
 
             medals = new List<int[]>
             {

@@ -19,7 +19,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startPos = new Vector3(0, 0, -2);
             items = new List<int> { };
             keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank };
-            crystalBerryAmount = 4;
+            crystalBerryAmount = 5;
 
             boardQuests = new List<int>[]
             {
@@ -36,7 +36,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 216,217,218,221,222,240,278,299,307,479,482,621,579,617,618,621,660,663,691,694,699
             };
 
-            cbFlags = new List<int>{0,2,4,5,8,9,12,15,16};
+            cbFlags = new List<int>{0,1,2,4,5,8,9,12,15,16};
 
             medals = new List<int[]>
             {
@@ -72,7 +72,9 @@ namespace SpeedrunPractice.Extensions.ILData
             {
                 new Split("Leave Hive", MainManager.Maps.HoneyFactoryEntrance, TypeSplit.Room),
                 new Split("Reach Throne", MainManager.Maps.DefiantRoot2, TypeSplit.Room),
-                new Split("Reach Tavern", MainManager.Maps.AntPalace2, TypeSplit.Room),
+                new Split("Reach Caravan", MainManager.Maps.AntPalace2, TypeSplit.Room),
+                new Split("Buy Spicies", MainManager.Maps.BugariaOutskirtsOutsideCity, TypeSplit.Room),
+                new Split("Reach Tavern", MainManager.Maps.BugariaMainPlaza, TypeSplit.Room),
                 new Split("Reach Crisbee", MainManager.Maps.UndergroundBar, TypeSplit.Room),
                 new Split("Leave DR", MainManager.Maps.DefiantRoot3, TypeSplit.Room),
                 new Split("Hawk", MainManager.Maps.DesertDRSouthEntrance, TypeSplit.Room),

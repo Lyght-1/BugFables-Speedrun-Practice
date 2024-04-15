@@ -280,9 +280,13 @@ namespace SpeedrunPractice.Extensions
             {
                 return;
             }
+            var beemerang = GameObject.Find("Beerang(Clone)");
 
             float flyHeight = transform.position.y - startHeight;
-            GUI.Box(new Rect(0f, Screen.height - 300f, 260f, 220f),
+            GUI.Box(new Rect(0f, Screen.height - 350f, 300f, 300f),
+              $"Beemerang Pos : {(beemerang != null ? beemerang.transform.position.ToString("F4") : "")}\n" +
+              $"Axis 1 : {Input.GetAxis("1")}\n" +
+              $"Axis 2 : {Input.GetAxis("2")}\n" +
               $"Area ID : {MainManager.map.areaid}\n" +
               $"Map : {MainManager.map.mapid}\n"+ 
               $"Map ID : {MainManager.map.name}\n" +

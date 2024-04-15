@@ -24,7 +24,7 @@ namespace SpeedrunPractice.Extensions.ILData
             };
             keyItems = new List<int> { (int)MainManager.Items.ExplorerPermit, (int)MainManager.Items.Map };
 
-            crystalBerryAmount = 4;
+            crystalBerryAmount = 5;
 
             boardQuests = new List<int>[]
             {
@@ -39,7 +39,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 108,114,115,119,120,240,479,579,617,621,691,694
             };
 
-            cbFlags = new List<int> { 0, 2, 5, 8 };
+            cbFlags = new List<int> { 0,1, 2, 5, 8 };
 
             medals = new List<int[]>
             {

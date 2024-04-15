@@ -16,7 +16,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startPos = new Vector3(-8, 0, 0);
             items = new List<int> { };
             keyItems = new List<int>{27,41, (int)MainManager.Items.GHCrank, 174,116};
-            crystalBerryAmount = 0;
+            crystalBerryAmount = 1;
 
             boardQuests = new List<int>[]
             {
@@ -35,7 +35,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 697,699,708
             };
 
-            cbFlags = new List<int>{0,2,4,5,8,9,12,15,16,18};
+            cbFlags = new List<int>{0,1,2,4,5,8,9,12,15,16,18};
 
             medals = new List<int[]>
             {
@@ -85,11 +85,9 @@ namespace SpeedrunPractice.Extensions.ILData
                 new Split("Wasp King", MainManager.Maps.DesertSandCastle, TypeSplit.BattleEnd, enemies:waspKing),
                 new Split("Disc & Dig CB", MainManager.Maps.AntPalace1, TypeSplit.Room),
                 new Split("Theater", MainManager.Maps.BugariaTheater, TypeSplit.Room),
-                new Split("Statue Dash", MainManager.Maps.BugariaMainPlaza, TypeSplit.Room),
-                new Split("Spicies", MainManager.Maps.BugariaOutskirtsOutsideCity, TypeSplit.Room),
                 new Split("Reach Tavern", MainManager.Maps.BugariaMainPlaza, TypeSplit.Room),
-                new Split("Reach Crisbee", MainManager.Maps.UndergroundBar, TypeSplit.Room),
-                new Split("Leave DR", MainManager.Maps.DefiantRoot3, TypeSplit.Room),
+                new Split("Reach DR", MainManager.Maps.UndergroundBar, TypeSplit.Room),
+                new Split("Leave DR", MainManager.Maps.DefiantRoot2, TypeSplit.Room),
                 new Split("Enter FG", MainManager.Maps.DesertDREastEntrance, TypeSplit.Room,endID: MainManager.Maps.FarGrasslands1)
             };
         }

@@ -15,7 +15,7 @@ namespace SpeedrunPractice.Extensions.ILData
             startPos = new Vector3(-63, 0, 35);
             items = new List<int>{17,17,26,2,2,1};
             keyItems = new List<int> { 27, 41, (int)MainManager.Items.GHCrank };
-            crystalBerryAmount = 3;
+            crystalBerryAmount = 4;
 
             boardQuests = new List<int>[]
             {
@@ -30,7 +30,7 @@ namespace SpeedrunPractice.Extensions.ILData
                 124,125,126,130,133,138,159,160,167,168,169,170,172,174,201,202,206,621,579,617,660,663,691,694,699
             };
 
-            cbFlags = new List<int>{ 0,2,4,5,8,9,13,15 };
+            cbFlags = new List<int>{ 0,1,2,4,5,8,9,13,15 };
 
             medals = new List<int[]>
             {
