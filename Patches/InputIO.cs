@@ -49,6 +49,7 @@ namespace SpeedrunPractice.Patches
             InputIO.keys[35] = KeyCode.F4;
             InputIO.keys[36] = KeyCode.F5;
             InputIO.keys[37] = KeyCode.Alpha9;
+            InputIO.keys[38] = KeyCode.Alpha0;
         }
     }
 

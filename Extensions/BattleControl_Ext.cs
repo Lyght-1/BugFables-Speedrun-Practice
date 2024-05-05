@@ -2,12 +2,16 @@
 using UnityEngine;
 using InputIOManager;
 using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 namespace SpeedrunPractice.Extensions
 {
     public class BattleControl_Ext : MonoBehaviour
     {
         public static int currentActionID = -1;
+
         public void PracticeFKeys()
         {
             var battleControl = gameObject.GetComponent<BattleControl>();
@@ -16,6 +20,11 @@ namespace SpeedrunPractice.Extensions
             {
                 MainManager.instance.GetComponent<ILTimer>().ResetIL();
             }
+
+            /*if (Input.GetKeyDown(KeyCode.A))
+            {
+                //StartCoroutine(CheckAllIcefallPositions());
+            }*/
 
             if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.FreeCam]))
             {
@@ -111,6 +120,7 @@ namespace SpeedrunPractice.Extensions
                 {
                     if (battle.enemydata != null && currentActionID >=0 && currentActionID < battle.enemydata.Length)
                     {
+                        Console.WriteLine($"CheckRNG : MIN = {min}, MAX={max}, originalChance = {originalChance}");
                         var animID = battle.enemydata[currentActionID].animid;
                         int maxAriaAttacks = 7;
                         int ariaAttack = 2; //vine
@@ -123,7 +133,7 @@ namespace SpeedrunPractice.Extensions
 
                         int b33Attack = 0; //laser
                         var hpPercentRef = AccessTools.Method(typeof(BattleControl), "HPPercent", new Type[] { typeof(MainManager.BattleData) });
-                        float hpp = (float)hpPercentRef.Invoke(battle, new object[] { battle.enemydata[0] });
+                        float hpp = (float)hpPercentRef.Invoke(battle, new object[] { battle.enemydata[currentActionID] });
                         int maxB33Attacks = hpp < 0.5f ? 6 : 4;
 
                         var position = battle.enemydata[currentActionID].position;
@@ -135,6 +145,11 @@ namespace SpeedrunPractice.Extensions
                         int maxScarletAttacks = hpp < 0.45f ? 13 : 9;
                         bool attackUp = MainManager.HasCondition(MainManager.BattleCondition.AttackUp, battle.enemydata[currentActionID]) != -1;
                         int scarletAttack = !attackUp ? 6 : 3; //attack up or beam attack
+
+
+                        //spuder
+                        int maxSpuderAttacks = hpp < 0.5f ? 6 : 2;
+                        int spuderAttack = battle.enemydata[currentActionID].cantmove == -1 ? 0 : 1;
 
                         switch (animID)
                         {
@@ -158,6 +173,8 @@ namespace SpeedrunPractice.Extensions
                             case (int)MainManager.Enemies.KeyL:
                             case (int)MainManager.Enemies.KeyR:
                                 return CheckMinMax(min, max, 0, 100, originalChance, 0); //spin attack
+                            case (int)MainManager.Enemies.Spuder:
+                                return CheckMinMax(min, max, 0, maxSpuderAttacks, originalChance, spuderAttack);
                         }
 
                         if (animID == (int)MainManager.Enemies.EverlastingKing && position == BattleControl.BattlePosition.Ground)
@@ -225,6 +242,59 @@ namespace SpeedrunPractice.Extensions
             {
                 getSingleTargetRef.Invoke(MainManager.battle, new object[] { 0 });
                 return false;
+            }
+
+            //always focus front
+            enemies = new int[] { (int)MainManager.Enemies.WaspKingIntermission, (int)MainManager.Enemies.Spuder, (int)MainManager.Enemies.KeyL, (int)MainManager.Enemies.KeyR};
+            enemyInField = (int)enemyInFieldRef.Invoke(MainManager.battle, new object[] { enemies });
+            if (enemyInField != -1)
+            {
+                for(int i = 0; i != MainManager.battle.partypointer.Length; i++)
+                {
+                    int partyPointer = MainManager.battle.partypointer[i];
+                    if (MainManager.instance.playerdata[partyPointer].hp != 0)
+                    {
+                        getSingleTargetRef.Invoke(MainManager.battle, new object[] { partyPointer });
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        IEnumerator CheckAllIcefallPositions()
+        {
+            float a = 0f;
+            float b = 500f;
+            do
+            {
+                Vector3 yoffset = ((!(MainManager.instance.camoffset.y > 4f)) ? Vector3.zero : new Vector3(0f, MainManager.instance.camoffset.y));
+                Vector3 position = new Vector3(3.5f + Mathf.Sin(Time.time * 5f) * 3.25f, 2.5f + Mathf.Cos(Time.time * 2f) * 2f, 0f) + yoffset;
+
+                if (CheckPerfectIcefall(position))
+                {
+                    Console.WriteLine($"found perfect icefall at {position.ToString("F4")}");
+                    SpriteRenderer crosshair2 = MainManager.NewUIObject("crosshair", null, default(Vector3)).AddComponent<SpriteRenderer>();
+                    crosshair2.transform.position = position;
+                    crosshair2.sprite = MainManager.guisprites[41];
+                    crosshair2.gameObject.layer = 15;
+                    crosshair2.color = Color.green;
+                }
+                a += MainManager.framestep;
+                yield return null;
+            } while (a <= b);
+        }
+
+        bool CheckPerfectIcefall(Vector3 crosshair)
+        {
+            var isInRadiusRef = AccessTools.Method(typeof(BattleControl), "IsInRadius", new Type[] { typeof(Vector3), typeof(MainManager.BattleData), typeof(float), typeof(bool)});
+            for (int num29 = 0; num29 < MainManager.battle.enemydata.Length; num29++)
+            {
+                if (!(bool)isInRadiusRef.Invoke(MainManager.battle, new object[] { crosshair, MainManager.battle.enemydata[num29], 3.3f, true }))
+                {
+                    return false;
+                }
             }
             return true;
         }

@@ -66,6 +66,7 @@ namespace SpeedrunPractice.Extensions.ILData
 
         public override void DoSpecifics()
         {
+            MainManager_Ext.togglePerfectRNG = true;
             MainManager.instance.flagvar[53] = 1;
             MainManager.instance.flagvar[54] = 5;
             MainManager.instance.flagvar[58] = 1;

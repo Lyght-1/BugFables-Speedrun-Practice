@@ -101,10 +101,29 @@ namespace SpeedrunPractice.Patches
     [HarmonyPatch(typeof(BattleControl), "DoAction")]
     public class PatchBattleControlDoAction
     {
-        static void Prefix(BattleControl __instance, int actionid)
+        static IEnumerator AddPrefix(BattleControl __instance, IEnumerator __result)
+        {
+            var ilTimer = MainManager.instance.GetComponent<ILTimer>();
+            if (BattleControl_Ext.currentActionID != -555)
+            {
+                ilTimer.timeAction = Time.realtimeSinceStartup;
+            }
+            while (__result.MoveNext())
+            {
+                yield return __result.Current;
+            }
+
+            if (MainManager_Ext.toggleActionTime && BattleControl_Ext.currentActionID != -555)
+            {
+                ilTimer.StartCoroutine(ilTimer.WaitForEndOfCommand());
+            }
+        }
+
+        static void Postfix(BattleControl __instance, int actionid, ref IEnumerator __result)
         {
             BattleControl_Ext.currentActionID = actionid;
             Console.WriteLine("action id : " + BattleControl_Ext.currentActionID);
+            __result = AddPrefix(__instance, __result);
         }
     }
 }

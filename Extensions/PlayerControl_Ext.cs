@@ -54,6 +54,15 @@ namespace SpeedrunPractice.Extensions
                 guiInfoMessage = "Inf. Jump : " + (MainManager_Ext.toggleInfJump ? "On" : "Off");
                 guiInfoCount = 1;
             }
+
+            if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.ActionTime]))
+            {
+                MainManager_Ext.toggleActionTime = !MainManager_Ext.toggleActionTime;
+                MainManager.PlaySound("Scroll", -1);
+                guiInfoMessage = "Action Timer : " + (MainManager_Ext.toggleActionTime ? "On" : "Off");
+                guiInfoCount = 1;
+            }
+
             if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.Speed]))
             {
                 __instance.basespeed = ((__instance.basespeed == 5) ? 10 : 5);

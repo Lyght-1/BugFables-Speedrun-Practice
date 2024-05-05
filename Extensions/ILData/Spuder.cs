@@ -49,7 +49,10 @@ namespace SpeedrunPractice.Extensions.ILData
             shadesPool = null;
         }
 
-        public override void DoSpecifics(){}
+        public override void DoSpecifics()
+        {
+            MainManager_Ext.togglePerfectRNG = true;
+        }
 
         public override void SetSplits()
         {

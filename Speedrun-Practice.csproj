@@ -391,6 +391,8 @@
     <Compile Include="Extensions\ILData\LeifRescue.cs" />
     <Compile Include="Extensions\ILData\Deadlands.cs" />
     <Compile Include="Extensions\ILData\RubberPrison.cs" />
+    <Compile Include="Extensions\ILData\SnakemouthLeft.cs" />
+    <Compile Include="Extensions\ILData\SnakemouthRight.cs" />
     <Compile Include="Extensions\ILData\Spuder.cs" />
     <Compile Include="Extensions\ILData\Swamplands.cs" />
     <Compile Include="Extensions\ILData\EnterFG.cs" />

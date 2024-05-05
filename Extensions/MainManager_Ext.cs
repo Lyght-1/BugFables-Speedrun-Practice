@@ -17,13 +17,14 @@ namespace SpeedrunPractice.Extensions
     {
         DebugMenu=10, InputDisplay, Heal, InfJump, Speed, Save, Reload, MainMenu, DownPos, UpPos, SavePos, LoadPos,
         ToggleCollision, FreeCam, TextStorage,AntiSoftlock, ExitIL, MapList, ChooseIL, ResetIL, ToggleGhost, UndoSplit, FreezeResistance, HideTimer,
-        KillEnemies,FleeBattle,ReloadBattle,PerfectRNG
+        KillEnemies,FleeBattle,ReloadBattle,PerfectRNG,ActionTime
     }
     public class MainManager_Ext : MonoBehaviour
     {
         public static bool drawInfo = false;
         public static bool toggleInfJump = false;
         public static int pp_TeleportIndex = 0;
+        public static bool toggleActionTime = false;
         public static Vector3[] pp_TeleportArray = null;
         public static bool showInputDisplay = false;
         public static bool battleMenu = false;
@@ -64,7 +65,8 @@ namespace SpeedrunPractice.Extensions
             "Kill Enemies",
             "Flee Battle",
             "Reload Battle",
-            "Toggle Perfect RNG"
+            "Toggle Perfect RNG",
+            "Toggle Action Time"
         };
         public const int BASE_KEY_AMOUNT = 10;
         public static void ResetState()

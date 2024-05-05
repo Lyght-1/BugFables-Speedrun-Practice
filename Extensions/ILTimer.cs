@@ -13,7 +13,8 @@ namespace SpeedrunPractice.Extensions
     public enum IL
     {
         LeifRescue,
-        Snakemouth,
+        SnakemouthLeft,
+        SnakemouthRight,
         Spuder,
         GoldenPath,
         Festival,
@@ -77,8 +78,15 @@ namespace SpeedrunPractice.Extensions
         public static bool lvlSongStarted = false;
         public static bool endCredit = false;
         int frameStart = 0;
+        DynamicFont timeCommand;
+        Transform timeCommandContainer;
+        public float timeAction;
         void Start()
         {
+            timeCommandContainer = MainManager.Create9Box(new Vector3(15f, 2.4f, 10f), new Vector3(3,1,1), 4, -20, Color.white, false);
+            timeCommandContainer.gameObject.SetActive(false);
+            timeCommand = DynamicFont.SetUp("temp.Text",false,true, 1f, 2, 100, Vector3.one * 0.75f, timeCommandContainer, new Vector3(-1.1f,-0.25f),Color.black,null);
+
             timerUI = DynamicFont.SetUp(true, 1f, 2, 100, Vector2.one * 1.2f, MainManager.GUICamera.transform, new Vector3(-7.6f, 2.4f, 10f));
             timerUI.dropshadow = true;
             timerUI.gameObject.SetActive(false);
@@ -225,7 +233,7 @@ namespace SpeedrunPractice.Extensions
                     MainManager.StopSound(sound.clip);
             }
 
-            if (il == IL.LeifRescue || il == IL.Snakemouth)
+            if (il == IL.LeifRescue || il == IL.SnakemouthLeft || il == IL.SnakemouthRight)
             {
                 MainManager.ChangeParty(new int[] { 0, 1 }, true, false);
             }
@@ -882,6 +890,37 @@ namespace SpeedrunPractice.Extensions
             start = false;
             Console.WriteLine("set start to false in undosplit");
             MainManager_Ext.ilMode = false;
+        }
+
+        public IEnumerator WaitForEndOfCommand()
+        {
+            TimeSpan time = TimeSpan.FromSeconds(Time.realtimeSinceStartup - timeAction);
+            Console.WriteLine(Split.GetTimeFormat(time));
+
+            timeCommandContainer.gameObject.SetActive(true);
+            timeCommand.text = Split.GetTimeFormat(time);
+            float a = 0f;
+            float b = 30f;
+            Vector3 startPos = timeCommandContainer.transform.localPosition;
+            do
+            {
+                timeCommandContainer.localPosition = Vector3.Lerp(startPos, new Vector3(7f, startPos.y, startPos.z), a / b);
+                a += MainManager.TieFramerate(1f);
+                yield return null;
+            } while (a < b);
+
+            yield return EventControl.halfsec;
+
+            a = 0f;
+            startPos = timeCommandContainer.transform.localPosition;
+            do
+            {
+                timeCommandContainer.transform.localPosition = Vector3.Lerp(startPos, new Vector3(15f, startPos.y, startPos.z), a / b);
+                a += MainManager.TieFramerate(1f);
+                yield return null;
+            } while (a < b);
+
+            timeCommandContainer.gameObject.SetActive(false);
         }
     }
 }
