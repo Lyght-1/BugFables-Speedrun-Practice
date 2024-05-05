@@ -120,7 +120,6 @@ namespace SpeedrunPractice.Extensions
                 {
                     if (battle.enemydata != null && currentActionID >=0 && currentActionID < battle.enemydata.Length)
                     {
-                        Console.WriteLine($"CheckRNG : MIN = {min}, MAX={max}, originalChance = {originalChance}");
                         var animID = battle.enemydata[currentActionID].animid;
                         int maxAriaAttacks = 7;
                         int ariaAttack = 2; //vine
