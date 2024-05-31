@@ -17,7 +17,7 @@ namespace SpeedrunPractice.Extensions
     {
         DebugMenu=10, InputDisplay, Heal, InfJump, Speed, Save, Reload, MainMenu, DownPos, UpPos, SavePos, LoadPos,
         ToggleCollision, FreeCam, TextStorage,AntiSoftlock, ExitIL, MapList, ChooseIL, ResetIL, ToggleGhost, UndoSplit, FreezeResistance, HideTimer,
-        KillEnemies,FleeBattle,ReloadBattle,PerfectRNG,ActionTime
+        KillEnemies,FleeBattle,ReloadBattle,PerfectRNG,ActionTime,IcefallVisualizer,PerfectIcefallToggle
     }
     public class MainManager_Ext : MonoBehaviour
     {
@@ -66,7 +66,9 @@ namespace SpeedrunPractice.Extensions
             "Flee Battle",
             "Reload Battle",
             "Toggle Perfect RNG",
-            "Toggle Action Time"
+            "Toggle Action Time",
+            "Toggle Icefall Visualizer",
+            "Perfect Icefalls Check"
         };
         public const int BASE_KEY_AMOUNT = 10;
         public static void ResetState()

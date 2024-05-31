@@ -11,7 +11,9 @@ namespace SpeedrunPractice.Extensions
     public class BattleControl_Ext : MonoBehaviour
     {
         public static int currentActionID = -1;
-
+        SpriteRenderer icefallCrosshair;
+        bool toggleIcefallVisualizer = false;
+        bool inPerfectIcefallCheck = false;
         public void PracticeFKeys()
         {
             var battleControl = gameObject.GetComponent<BattleControl>();
@@ -21,10 +23,22 @@ namespace SpeedrunPractice.Extensions
                 MainManager.instance.GetComponent<ILTimer>().ResetIL();
             }
 
-            /*if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.IcefallVisualizer]))
             {
-                //StartCoroutine(CheckAllIcefallPositions());
-            }*/
+                toggleIcefallVisualizer = !toggleIcefallVisualizer;
+                MainManager.PlaySound("Scroll", -1);
+                if(icefallCrosshair == null)
+                    StartCoroutine(DoFakeIcefall());
+            }
+
+            if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.PerfectIcefallToggle]))
+            {
+                if (!inPerfectIcefallCheck)
+                {
+                    MainManager.PlaySound("Scroll", -1);
+                    StartCoroutine(CheckAllIcefallPositions());
+                }
+            }
 
             if (Input.GetKeyDown(InputIO.keys[(int)PracticeKeys.FreeCam]))
             {
@@ -130,7 +144,8 @@ namespace SpeedrunPractice.Extensions
                         float minScorpTailWait = 0.65f;
                         float maxScorpTailWait = 0.85f;
 
-                        int b33Attack = 0; //laser
+
+                        int b33Attack = 0;
                         var hpPercentRef = AccessTools.Method(typeof(BattleControl), "HPPercent", new Type[] { typeof(MainManager.BattleData) });
                         float hpp = (float)hpPercentRef.Invoke(battle, new object[] { battle.enemydata[currentActionID] });
                         int maxB33Attacks = hpp < 0.5f ? 6 : 4;
@@ -225,7 +240,7 @@ namespace SpeedrunPractice.Extensions
             var getSingleTargetRef = AccessTools.Method(typeof(BattleControl), "GetSingleTarget", new Type[] { typeof(int)});
             var enemyInFieldRef = AccessTools.Method(typeof(BattleControl), "EnemyInField", new Type[] { typeof(int[]) });
 
-            //always focuses kabbu
+            //always focus kabbu
             var enemies = new int[] { (int)MainManager.Enemies.BanditLeader, (int)MainManager.Enemies.EverlastingKing };
             var enemyInField = (int)enemyInFieldRef.Invoke(MainManager.battle, new object[] { enemies });
             if (MainManager.instance.playerdata[1].hp != 0 && enemyInField != -1)
@@ -234,36 +249,23 @@ namespace SpeedrunPractice.Extensions
                 return false;
             }
 
-            //always focuses vi
-            enemies = new int[] { (int)MainManager.Enemies.Centipede, (int)MainManager.Enemies.Scorpion, (int)MainManager.Enemies.WaspKing, (int)MainManager.Enemies.WaspGeneral };
-            enemyInField = (int)enemyInFieldRef.Invoke(MainManager.battle, new object[] { enemies });
-            if (MainManager.instance.playerdata[0].hp != 0 && enemyInField != -1)
-            {
-                getSingleTargetRef.Invoke(MainManager.battle, new object[] { 0 });
-                return false;
-            }
-
             //always focus front
-            enemies = new int[] { (int)MainManager.Enemies.WaspKingIntermission, (int)MainManager.Enemies.Spuder, (int)MainManager.Enemies.KeyL, (int)MainManager.Enemies.KeyR};
-            enemyInField = (int)enemyInFieldRef.Invoke(MainManager.battle, new object[] { enemies });
-            if (enemyInField != -1)
+            for(int i = 0; i != MainManager.battle.partypointer.Length; i++)
             {
-                for(int i = 0; i != MainManager.battle.partypointer.Length; i++)
+                int partyPointer = MainManager.battle.partypointer[i];
+                if (MainManager.instance.playerdata[partyPointer].hp != 0)
                 {
-                    int partyPointer = MainManager.battle.partypointer[i];
-                    if (MainManager.instance.playerdata[partyPointer].hp != 0)
-                    {
-                        getSingleTargetRef.Invoke(MainManager.battle, new object[] { partyPointer });
-                        return false;
-                    }
+                    getSingleTargetRef.Invoke(MainManager.battle, new object[] { partyPointer });
+                    return false;
                 }
             }
-
             return true;
         }
 
         IEnumerator CheckAllIcefallPositions()
         {
+            inPerfectIcefallCheck = true;
+            List<SpriteRenderer> perfectIcefalls = new List<SpriteRenderer>();
             float a = 0f;
             float b = 500f;
             do
@@ -273,16 +275,29 @@ namespace SpeedrunPractice.Extensions
 
                 if (CheckPerfectIcefall(position))
                 {
-                    Console.WriteLine($"found perfect icefall at {position.ToString("F4")}");
-                    SpriteRenderer crosshair2 = MainManager.NewUIObject("crosshair", null, default(Vector3)).AddComponent<SpriteRenderer>();
-                    crosshair2.transform.position = position;
-                    crosshair2.sprite = MainManager.guisprites[41];
-                    crosshair2.gameObject.layer = 15;
-                    crosshair2.color = Color.green;
+                    bool found = false;
+                    for (int i = 0; i < perfectIcefalls.Count; i++)
+                    {
+                        if (perfectIcefalls[i].transform.position == position)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        SpriteRenderer crosshair = CreateCrosshair(Color.green, "crosshair");
+                        crosshair.transform.position = position;
+                        perfectIcefalls.Add(crosshair);
+                    }
                 }
                 a += MainManager.framestep;
                 yield return null;
             } while (a <= b);
+            foreach (var p in perfectIcefalls)
+                Destroy(p);
+            inPerfectIcefallCheck = false;
         }
 
         bool CheckPerfectIcefall(Vector3 crosshair)
@@ -296,6 +311,32 @@ namespace SpeedrunPractice.Extensions
                 }
             }
             return true;
+        }
+
+        IEnumerator DoFakeIcefall()
+        {
+            if (icefallCrosshair == null)
+            {
+                icefallCrosshair = CreateCrosshair(Color.blue, "fakeCrosshair");
+                do
+                {
+                    Vector3 yoffset = (MainManager.instance.camoffset.y <= 4f) ? Vector3.zero : new Vector3(0f, MainManager.instance.camoffset.y);
+                    icefallCrosshair.transform.eulerAngles += Vector3.forward * MainManager.TieFramerate(5f);
+                    icefallCrosshair.transform.position = new Vector3(3.5f + Mathf.Sin(Time.time * 5f) * 3.25f, 2.5f + Mathf.Cos(Time.time * 2f) * 2f, 0f) + yoffset;
+                    yield return null;
+                }
+                while (toggleIcefallVisualizer);
+                Destroy(icefallCrosshair.gameObject);
+            }
+        }
+
+        SpriteRenderer CreateCrosshair(Color color, string name)
+        {
+            SpriteRenderer crosshair = MainManager.NewUIObject(name, null, default(Vector3)).AddComponent<SpriteRenderer>();
+            crosshair.sprite = MainManager.guisprites[41];
+            crosshair.color = color;
+            crosshair.gameObject.layer = 15;
+            return crosshair;
         }
     }
 }

@@ -229,7 +229,7 @@ namespace SpeedrunPractice.Extensions
             {
                 return;
             }
-            GUI.Box(new Rect(0f, (float)Screen.height - 340f, 150f, 32f), guiInfoMessage, guiStyle);
+            GUI.Box(new Rect(0f, (float)Screen.height -400f, 150f, 32f), guiInfoMessage, guiStyle);
             guiInfoCount++;
             if (guiInfoCount > 180)
             {

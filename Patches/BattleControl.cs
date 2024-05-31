@@ -81,7 +81,8 @@ namespace SpeedrunPractice.Patches
     {
         static bool Prefix(BattleControl __instance)
         {
-            if (MainManager.battle.enemy && MainManager_Ext.togglePerfectRNG)
+            int forceattack = AccessTools.FieldRefAccess<BattleControl, int>(__instance, "forceattack");
+            if (__instance.enemy && MainManager_Ext.togglePerfectRNG && forceattack == -1)
             {
                 return BattleControl_Ext.CheckTarget();
             }
@@ -101,6 +102,7 @@ namespace SpeedrunPractice.Patches
     [HarmonyPatch(typeof(BattleControl), "DoAction")]
     public class PatchBattleControlDoAction
     {
+
         static IEnumerator AddPrefix(BattleControl __instance, IEnumerator __result)
         {
             var ilTimer = MainManager.instance.GetComponent<ILTimer>();
@@ -116,6 +118,7 @@ namespace SpeedrunPractice.Patches
             if (MainManager_Ext.toggleActionTime && BattleControl_Ext.currentActionID != -555)
             {
                 ilTimer.StartCoroutine(ilTimer.WaitForEndOfCommand());
+
             }
         }
 

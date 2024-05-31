@@ -10,7 +10,7 @@ namespace SpeedrunPractice.Patches
     {
         static void Postfix(InputIO __instance)
         {
-            InputIO.keys = new KeyCode[MainManager_Ext.BASE_KEY_AMOUNT+ Enum.GetValues(typeof(PracticeKeys)).Length];
+            InputIO.keys = new KeyCode[MainManager_Ext.BASE_KEY_AMOUNT + Enum.GetValues(typeof(PracticeKeys)).Length];
             InputIO.keys[0] = KeyCode.UpArrow;
             InputIO.keys[1] = KeyCode.DownArrow;
             InputIO.keys[2] = KeyCode.LeftArrow;
@@ -50,6 +50,8 @@ namespace SpeedrunPractice.Patches
             InputIO.keys[36] = KeyCode.F5;
             InputIO.keys[37] = KeyCode.Alpha9;
             InputIO.keys[38] = KeyCode.Alpha0;
+            InputIO.keys[39] = KeyCode.Q;
+            InputIO.keys[40] = KeyCode.W;
         }
     }
 

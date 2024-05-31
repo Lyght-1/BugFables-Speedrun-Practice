@@ -77,7 +77,7 @@ namespace SpeedrunPractice.Extensions.ILData
             splits = new List<Split>
             {
                 new Split("Reach DR", MainManager.Maps.DesertBadgeAlcove, TypeSplit.Room),
-                new Split("Museum", MainManager.Maps.DefiantRoot1, TypeSplit.Room),
+                new Split("Defiant Root 1", MainManager.Maps.DefiantRoot1, TypeSplit.Room),
                 new Split("Elevator", MainManager.Maps.DefiantRoot2, TypeSplit.Room),
                 new Split("Get BS", MainManager.Maps.BeehiveScannerRoom, TypeSplit.Room),
                 new Split("Balcony", MainManager.Maps.BeehiveBalcony, TypeSplit.Room),

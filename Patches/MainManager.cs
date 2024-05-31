@@ -209,7 +209,7 @@ namespace SpeedrunPractice.Patches
 
                 if (inst.operand == typeof(MainManager).GetField("maxoptions") && indexMaxOptions == -1)
                 {
-                    indexMaxOptions = i -5;
+                    indexMaxOptions = i -11;
                 }
             }
 
