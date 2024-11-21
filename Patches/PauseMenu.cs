@@ -75,14 +75,21 @@ namespace SpeedrunPractice.Patches
             var instructionsList = instructions.ToList();
             var pressedResetInputKeysRef = AccessTools.Method(typeof(MainManager_Ext), "PressedResetInputKeys");
             int indexToInsertPatch = -1;
+
+            int count = 0;
             for (int i = 0; i < instructionsList.Count; i++)
             {
                 var inst = instructionsList[i];
 
                 if (inst.LoadsConstant(282) && indexToInsertPatch == -1)
                 {
-                    indexToInsertPatch = i;
-                    break;
+                    count++;
+
+                    if(count == 2)
+                    {
+                        indexToInsertPatch = i;
+                        break;
+                    }
                 }
             }
 
